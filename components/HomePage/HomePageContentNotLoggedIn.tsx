@@ -25,7 +25,6 @@ const HomePageContentNotLoggedIn = () => {
 
     if (newAnchor !== currentAnchor) {
       setCurrentAnchor(newAnchor);
-      location.href = `#${ANCHORS[newAnchor]}`;
 
       let offsetNewAnchor;
 
@@ -36,10 +35,13 @@ const HomePageContentNotLoggedIn = () => {
           document.querySelector(`#${ANCHORS[newAnchor]}`) as HTMLElement
         ).offsetTop;
       }
+
+      document.removeEventListener("scroll", handleScroll);
       window.scrollTo({
         top: offsetNewAnchor,
-        behavior: "smooth", // TODO: understand why smooth doesn't work
+        behavior: "smooth",
       });
+      document.addEventListener("scroll", handleScroll);
     }
   };
 
